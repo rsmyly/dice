@@ -6,7 +6,7 @@ import styles from "./Die.module.css";
 
 export type DieProps = DieConfiguration;
 
-const defaultDelayTimeMs = 1000 * 1.5;
+const defaultDelayTimeMs = 1000 * 1.0;
 
 const Die = ({ name, choices }: DieProps) => {
   const [choice, isChoicePending, choose] = useChooserWithDelay({
