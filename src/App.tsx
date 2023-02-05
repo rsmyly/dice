@@ -1,9 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Die from "./components/Die";
 
 function App() {
-  return (
+  /*return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -20,7 +21,9 @@ function App() {
         </a>
       </header>
     </div>
-  );
+  );*/
+
+  return <Die choices={["1", "2", "3", "4", "5", "6"]} name="test"></Die>;
 }
 
 export default App;
