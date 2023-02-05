@@ -1,0 +1,11 @@
+.die {
+	border: 1px solid #555;
+	border-radius: 10px;
+	text-align: center;
+	width: 4em;
+	padding: .5em;
+}
+
+.choiceDisplay, .rollButtonContainer {
+	margin-top: .6em;
+}

@@ -4,20 +4,20 @@ import { getArrayFromRange } from "./util";
 export const makeNumberedDie = ({
   dNumber,
   name,
-  choiceModifier,
+  getDisplayStringFromNumber,
 }: {
   dNumber: number;
   name?: string;
-  choiceModifier?: (choice: Choice) => Choice;
+  getDisplayStringFromNumber?: (number: number) => Choice;
 }): DieConfiguration => {
-  const numbers = getArrayFromRange(1, dNumber + 1).map((elem) =>
-    elem.toString()
-  );
+  const numbers = getArrayFromRange(1, dNumber + 1);
 
-  const finalChoices = choiceModifier ? numbers.map(choiceModifier) : numbers;
+  const display = getDisplayStringFromNumber ?? ((value) => value.toString());
+
+  const displayChoices = numbers.map((number) => display(number));
 
   return {
     name: name ?? `d${dNumber}`,
-    choices: finalChoices,
+    choices: displayChoices,
   };
 };

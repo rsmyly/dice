@@ -1,0 +1,12 @@
+.diceTray {
+	border: 2px solid #555;
+	border-radius: 10px;
+	min-width: 50%;
+	max-width: 90%;
+	min-height: 5rem;
+	display: flex;
+	flex-flow: row wrap;
+	gap: 5px;
+	padding: 5px;
+	margin: 0 auto;
+}

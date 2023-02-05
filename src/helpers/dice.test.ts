@@ -18,7 +18,7 @@ describe("makeNumberedDie", () => {
     const d6 = makeNumberedDie({
       dNumber: 6,
       name: "regular die but times 10",
-      choiceModifier: (choice) => choice + "0",
+      getDisplayStringFromNumber: (choice) => choice.toString() + "0",
     });
     expect(d6).toEqual({
       name: "regular die but times 10",
