@@ -1,47 +1,28 @@
-import { makeNumberedDiceSet } from "./dice";
+import { makeNumberedDie } from "./dice";
 
-describe("makeNumberedDiceSet", () => {
-  it("returns correct dice configuration for list with both numbers and objects", () => {
-    const config = [
-      2,
-      { name: "just a regular die", number: 6 },
-      { name: "die x 10", number: 6, suffix: "0" },
-      12,
-    ];
+describe("makeNumberedDie", () => {
+  it("makes die from just number", () => {
+    const d4 = makeNumberedDie({ dNumber: 4 });
+    expect(d4).toEqual({ name: "d4", choices: ["1", "2", "3", "4"] });
+  });
 
-    const expectedOutput = {
-      d2: {
-        name: "d2",
-        choices: ["1", "2"],
-      },
-      "just a regular die": {
-        name: "just a regular die",
-        choices: ["1", "2", "3", "4", "5", "6"],
-      },
-      "die x 10": {
-        name: "die x 10",
-        choices: ["10", "20", "30", "40", "50", "60"],
-      },
-      d12: {
-        name: "d12",
-        choices: [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "11",
-          "12",
-        ],
-      },
-    };
+  it("makes die with custom name", () => {
+    const d6 = makeNumberedDie({ dNumber: 6, name: "regular die" });
+    expect(d6).toEqual({
+      name: "regular die",
+      choices: ["1", "2", "3", "4", "5", "6"],
+    });
+  });
 
-    const dice = makeNumberedDiceSet(config);
-    expect(dice).toEqual(expectedOutput);
+  it("makes die with custom modifier", () => {
+    const d6 = makeNumberedDie({
+      dNumber: 6,
+      name: "regular die but times 10",
+      choiceModifier: (choice) => choice + "0",
+    });
+    expect(d6).toEqual({
+      name: "regular die but times 10",
+      choices: ["10", "20", "30", "40", "50", "60"],
+    });
   });
 });
