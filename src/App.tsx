@@ -4,7 +4,7 @@ import DiceTray from "./components/DiceTray";
 function App() {
   return (
     <>
-      <h1>Roller</h1>
+      <h1>dice</h1>
       <DiceTray></DiceTray>
     </>
   );

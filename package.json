@@ -1,5 +1,5 @@
 {
-  "name": "roller",
+  "name": "dice",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -58,5 +58,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://rsmyly.github.io/roller"
+  "homepage": "https://rsmyly.github.io/dice"
 }
