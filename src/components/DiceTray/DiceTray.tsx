@@ -9,7 +9,6 @@ const DiceTray = () => {
 
   return (
     <>
-      <h2>Tray</h2>
       <div className={styles.diceTray}>{dice}</div>
     </>
   );
