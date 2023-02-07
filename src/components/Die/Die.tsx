@@ -14,17 +14,24 @@ const Die = ({ name, choices }: DieProps) => {
     delayTimeMs: defaultDelayTimeMs,
   });
 
+  const [isBeingPushed, setIsBeingPushed] = useState(false);
+
   const choiceDisplay = isChoicePending ? "rolling..." : choice;
 
   return (
-    <div className={styles.die}>
+    <div
+      className={styles.die + (isBeingPushed ? " " + styles.pushed : "")}
+      onPointerDown={() => setIsBeingPushed(true)}
+      onPointerUp={() => {
+        if (isBeingPushed) {
+          choose();
+        }
+        setIsBeingPushed(false);
+      }}
+      onPointerOut={() => setIsBeingPushed(false)}
+    >
       <div className={styles.dieName}>{name}</div>
       <div className={styles.choiceDisplay}>{choiceDisplay}</div>
-      <div className={styles.rollButtonContainer}>
-        <button type="button" onClick={choose}>
-          Roll
-        </button>
-      </div>
     </div>
   );
 };

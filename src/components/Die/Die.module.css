@@ -2,8 +2,21 @@
 	border: 1px solid #555;
 	border-radius: 10px;
 	text-align: center;
-	width: 4em;
+	min-width: 6em;
+	max-width: 9em;
+	min-height: 8em;
 	padding: .5em;
+	overflow-wrap: break-word;
+}
+
+.die.pushed {
+	border: 5px solid #555;
+	padding: -5px;
+	border-radius: 10px;
+}
+
+.dieName {
+	font-weight: bold;
 }
 
 .choiceDisplay, .rollButtonContainer {
