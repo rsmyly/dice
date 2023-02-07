@@ -2,6 +2,7 @@ import { makeNumberedDie } from "./helpers/dice";
 import { DieConfiguration } from "./types";
 
 export const standardDice = {
+  coin: { name: "Coin", choices: ["Heads", "Tails"] },
   d4: makeNumberedDie({ dNumber: 4 }),
   d6: makeNumberedDie({ dNumber: 6 }),
   d8: makeNumberedDie({ dNumber: 8 }),
