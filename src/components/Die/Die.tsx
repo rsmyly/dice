@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { getRandomElementFromArray } from "helpers/random";
+import { useEffect, useState } from "react";
 
-import { DieConfiguration } from "../../types";
+import { ChoiceList, DieConfiguration } from "../../types";
 import { useChooserWithDelay } from "../hooks/useChooser";
 import styles from "./Die.module.css";
 
 export type DieProps = DieConfiguration;
 
-const defaultDelayTimeMs = 1000 * 1.0;
+const defaultPlacholderIterationTimeMs = 50;
+const DieResultPlaceholder = ({ choices }: { choices: ChoiceList }) => {
+  const [placeholder, setPlaceholder] = useState("");
 
+  const updatePlaceHolder = () => {
+    let newPlaceHolder = placeholder;
+
+    while (newPlaceHolder === placeholder) {
+      newPlaceHolder = getRandomElementFromArray(choices);
+    }
+
+    setPlaceholder(newPlaceHolder);
+  };
+
+  useEffect(() => {
+    updatePlaceHolder();
+
+    const intervalPointer = setInterval(() => {
+      updatePlaceHolder();
+    }, defaultPlacholderIterationTimeMs);
+
+    return () => {
+      clearInterval(intervalPointer);
+    };
+
+    // eslint-disable-next-line
+  }, [...choices]);
+
+  return <span>{placeholder}</span>;
+};
+
+const defaultDelayTimeMs = 1000 * 1.0;
 const Die = ({ name, choices }: DieProps) => {
   const [choice, isChoicePending, choose] = useChooserWithDelay({
     choices,
@@ -16,7 +47,11 @@ const Die = ({ name, choices }: DieProps) => {
 
   const [isBeingPushed, setIsBeingPushed] = useState(false);
 
-  const choiceDisplay = isChoicePending ? "rolling..." : choice;
+  const choiceDisplay = isChoicePending ? (
+    <DieResultPlaceholder choices={choices} />
+  ) : (
+    choice
+  );
 
   return (
     <div
