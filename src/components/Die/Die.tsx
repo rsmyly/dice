@@ -7,7 +7,7 @@ import styles from "./Die.module.css";
 
 export type DieProps = DieConfiguration;
 
-const defaultPlacholderIterationTimeMs = 50;
+const defaultPlacholderIterationTimeMs = 75;
 const DieResultPlaceholder = ({ choices }: { choices: ChoiceList }) => {
   const [placeholder, setPlaceholder] = useState("");
 
@@ -22,11 +22,18 @@ const DieResultPlaceholder = ({ choices }: { choices: ChoiceList }) => {
   };
 
   useEffect(() => {
-    updatePlaceHolder();
+    let lastUpdated = new Date();
 
+    updatePlaceHolder();
     const intervalPointer = setInterval(() => {
-      updatePlaceHolder();
-    }, defaultPlacholderIterationTimeMs);
+      if (
+        new Date().getTime() - lastUpdated.getTime() >
+        defaultPlacholderIterationTimeMs
+      ) {
+        lastUpdated = new Date();
+        updatePlaceHolder();
+      }
+    }, defaultPlacholderIterationTimeMs / 4);
 
     return () => {
       clearInterval(intervalPointer);
