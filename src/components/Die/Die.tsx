@@ -7,16 +7,18 @@ import styles from "./Die.module.css";
 
 export type DieProps = DieConfiguration;
 
+// TODO: this whole placeholder thing has become a mess
 const defaultPlacholderIterationTimeMs = 75;
 const DieResultPlaceholder = ({ choices }: { choices: ChoiceList }) => {
   const [placeholder, setPlaceholder] = useState("");
 
   const updatePlaceHolder = () => {
-    let newPlaceHolder = placeholder;
+    const otherChoices = choices.filter((choice) => choice !== placeholder);
 
-    while (newPlaceHolder === placeholder) {
-      newPlaceHolder = getRandomElementFromArray(choices);
-    }
+    const newPlaceHolder =
+      otherChoices.length === 1
+        ? otherChoices[0]
+        : getRandomElementFromArray(otherChoices);
 
     setPlaceholder(newPlaceHolder);
   };
@@ -33,7 +35,7 @@ const DieResultPlaceholder = ({ choices }: { choices: ChoiceList }) => {
         lastUpdated = new Date();
         updatePlaceHolder();
       }
-    }, defaultPlacholderIterationTimeMs / 4);
+    }, defaultPlacholderIterationTimeMs / 5);
 
     return () => {
       clearInterval(intervalPointer);
