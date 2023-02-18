@@ -42,7 +42,6 @@ const NavContainer = ({ tabs }: NavContainerProps) => {
           {tab.content}
         </div>
       ))}
-      ;
     </>
   );
 };
